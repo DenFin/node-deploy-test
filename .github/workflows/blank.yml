@@ -14,16 +14,16 @@ jobs:
       - uses: webfactory/ssh-agent@v0.5.1
         with:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-            
-    - name: SSH and deploy node app
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          cd ~/httpdocs/dennisfink-dev.de/expressjs-deploy-test
-          git pull origin master
-          npm install --production
-          pm2 restart node-app
+
+      - name: SSH and deploy node app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd ~/httpdocs/dennisfink-dev.de/expressjs-deploy-test
+            git pull origin master
+            npm install --production
+            pm2 restart node-app

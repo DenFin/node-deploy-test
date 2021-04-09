@@ -1,24 +1,38 @@
-name: Deploy to dev server
+# name: Deploy to dev server
 
-on:
-  push:
-    branches:
-      - development
+# on:
+#   push:
+#     branches:
+#       - development
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
 
-    steps:
-    - name: SSH and deploy node app
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          cd ~/httpdocs/dennisfink-dev.de/expressjs-deploy-test
-          git pull origin master
-          npm install --production
-          pm2 restart node-app
+#       - step:
+#           caches:
+#             - node
+#           script:
+#             - npm install
+#             - npm run build
+#             - git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_GIT.git master:master
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: SSH Key
+#         uses: webfactory/ssh-agent@v0.5.1
+#         with:
+#             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+#       - name: SSH and deploy node app
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{ secrets.SSH_HOST }}
+#           username: ${{ secrets.SSH_USERNAME }}
+#           key: ${{ secrets.SSH_PRIVATE_KEY }}
+#           port: ${{ secrets.SSH_PORT }}
+#           script: |
+#             cd ~/httpdocs/dennisfink-dev.de/expressjs-deploy-test
+#             git pull origin master
+#             npm install --production
+#             pm2 restart node-app
